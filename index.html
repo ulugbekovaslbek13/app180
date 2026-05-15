@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Aslbek | Quick Notes</title>
+    <style>
+        body { background: #121212; color: white; font-family: 'Arial', sans-serif; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .input-box { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; }
+        textarea { width: 300px; height: 60px; border-radius: 10px; padding: 10px; background: #1e1e1e; color: white; border: 1px solid #333; }
+        button { background: #ffeb3b; color: black; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        #notesGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        .note { background: #fff9c4; color: #333; padding: 20px; border-radius: 10px; min-height: 100px; position: relative; box-shadow: 5px 5px 15px rgba(0,0,0,0.3); transform: rotate(-2deg); transition: 0.3s; }
+        .note:hover { transform: rotate(0deg) scale(1.05); }
+        .del { position: absolute; top: 5px; right: 10px; cursor: pointer; color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Tezkor Eslatmalar</h1>
+</div>
+
+<div class="input-box">
+    <textarea id="noteText" placeholder="Nimadir yozing..."></textarea>
+    <button onclick="addNote()">Qo'shish</button>
+</div>
+
+<div id="notesGrid"></div>
+
+<script>
+    function addNote() {
+        const text = document.getElementById('noteText').value;
+        if (!text) return;
+
+        const grid = document.getElementById('notesGrid');
+        const div = document.createElement('div');
+        div.className = 'note';
+        div.innerHTML = `
+            <span class="del" onclick="this.parentElement.remove()">X</span>
+            <p>${text}</p>
+        `;
+
+        grid.appendChild(div);
+        document.getElementById('noteText').value = '';
+    }
+</script>
+
+</body>
+</html>
